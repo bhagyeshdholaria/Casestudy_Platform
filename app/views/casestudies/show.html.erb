@@ -1,0 +1,29 @@
+<div class="d-flex align-items-center justify-content-between">
+  <h1><%= @casestudy.id %>. <%= @casestudy.name %></h1>
+<div>
+  <%= link_to 'Add Page', casestudy_new_page_path(@casestudy), class: 'btn btn-primary' %>
+  <%#= link_to 'Add Question', casestudy_new_page_path(@casestudy), class: 'btn btn-secondary' %>
+</div>
+</div>
+
+<!--<h1><%#= @casestudy.id %>. <%#= @casestudy.name %></h1>-->
+<div>
+  <h5>duration: <%= @casestudy.duration %></h5>
+  <h5>scale: <%= @casestudy.scale %></h5>
+</div><br>
+<%#= link_to 'Add Page', casestudy_new_page_path(@casestudy) %>
+
+
+
+<div class="row">
+  <div class="col-8">
+    <div class="d-flex align-items-center justify-content-between">
+        <h2>Pages</h2>
+        <%#= link_to 'Add Page', casestudy_new_page_path(@casestudy), class: 'btn btn-primary' %>
+    </div>
+    <% @casestudy.pages.each_with_index do |page, index| %>
+      <p><%= index+1 %>) <%= page.body %></p>
+    <% end %>
+  </div>
+
+</div>

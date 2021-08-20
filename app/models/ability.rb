@@ -11,7 +11,7 @@ class Ability
 
     if user.roles.exists?(name: 'contentcreator')
       can :contentcreatordash, :dashboard
-      can [:read, :update], Casestudy, creator: user
+      can :manage, Casestudy, creator: user
 
     elsif user.roles.exists?(name: 'assessor')
       can :assessordash, :dashboard

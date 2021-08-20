@@ -1,0 +1,6 @@
+<!--<p><%#= @casestudies.inspect %></p>-->
+<%= link_to 'Create Casestudy', new_casestudy_path %>
+
+<% @casestudies.each do |casestudy| %>
+  <h1> <%= casestudy.name %> </h1>
+<% end %>

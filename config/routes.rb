@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   get '/assessor_dashboard', to: 'dashboard#assessordash', as: 'assessor_dashboard'
   get '/contentcreator_dashboard', to: 'dashboard#contentcreatordash', as: 'contentcreator_dashboard'
 
-  resources :casestudies
+  resources :casestudies do
+    get '/new_page', to: 'casestudies#newpage'
+    post '/new_page', to: 'casestudies#createpage'
+  end
 end

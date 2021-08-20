@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Casestudy_Platform_development" uuid="145b832a-1631-456f-80e5-d5090d0f9ed4">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
     <data-source source="LOCAL" name="Rails Casestudy_Platform: development" uuid="4daf9b9d-b3a1-4fb4-9f66-522e9d71c3a0">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
