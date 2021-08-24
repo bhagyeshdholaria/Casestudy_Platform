@@ -1,29 +1,32 @@
-<div class="d-flex align-items-center justify-content-between">
+<div class="d-flex align-items-center justify-content-between p-3">
   <h1><%= @casestudy.id %>. <%= @casestudy.name %></h1>
-<div>
-  <%= link_to 'Add Page', casestudy_new_page_path(@casestudy), class: 'btn btn-primary' %>
-  <%#= link_to 'Add Question', casestudy_new_page_path(@casestudy), class: 'btn btn-secondary' %>
-</div>
-</div>
-
-<!--<h1><%#= @casestudy.id %>. <%#= @casestudy.name %></h1>-->
-<div>
-  <h5>duration: <%= @casestudy.duration %></h5>
-  <h5>scale: <%= @casestudy.scale %></h5>
-</div><br>
-<%#= link_to 'Add Page', casestudy_new_page_path(@casestudy) %>
-
-
-
-<div class="row">
-  <div class="col-8">
-    <div class="d-flex align-items-center justify-content-between">
-        <h2>Pages</h2>
-        <%#= link_to 'Add Page', casestudy_new_page_path(@casestudy), class: 'btn btn-primary' %>
-    </div>
-    <% @casestudy.pages.each_with_index do |page, index| %>
-      <p><%= index+1 %>) <%= page.body %></p>
+  <div>
+    <% if can? :update, Casestudy %>
+      <%= link_to 'Edit casestudy details', edit_casestudy_path(@casestudy), class: 'btn btn-primary' %>
+      <%= link_to 'Add Page', new_casestudy_page_path(@casestudy), class: 'btn btn-primary' %>
+      <%= link_to 'Add Question', new_casestudy_question_path(@casestudy), class: 'btn btn-primary' %>
     <% end %>
   </div>
+</div>
+<h5 class="mb-5">duration: <%= @casestudy.duration %> | scale: <%= @casestudy.scale %></h5>
 
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="situation-tab" data-bs-toggle="tab" data-bs-target="#situation" type="button" role="tab" aria-controls="situation" aria-selected="true">Situation</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="questions-tab" data-bs-toggle="tab" data-bs-target="#questions" type="button" role="tab" aria-controls="questions" aria-selected="true">Questions</button>
+  </li>
+</ul><br>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="situation" role="tabpanel" aria-labelledby="situation-tab">
+    <% @casestudy.pages.each_with_index do |page, index| %>
+      <%= render 'pages/page',page: page, cnt: index+1 %>
+    <% end %>
+  </div>
+  <div class="tab-pane fade" id="questions" role="tabpanel" aria-labelledby="questions-tab">
+    <% @casestudy.questions.each_with_index do |question, index| %>
+    <%= render 'questions/question', question: question, cnt: index+1 %>
+    <% end %>
+  </div>
 </div>

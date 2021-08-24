@@ -2,36 +2,28 @@ class CasestudiesController < ApplicationController
   load_and_authorize_resource
   def index; end
 
+  def show; end
+
   def new
     @casestudy = current_user.createdcasestudies.build
-  end
-
-  def show
-
   end
 
   def create
     @casestudy = current_user.createdcasestudies.create(casestudy_params)
     if @casestudy.save
-      redirect_to @casestudy
+      redirect_to @casestudy, notice: 'Casestudy created successfully.'
+    else
+      render :new
     end
   end
 
-  def newpage
-    @page = Casestudy.find(params[:casestudy_id]).pages.build
-    # puts @page.inspect
-  end
+  def edit; end
 
-  def createpage
-    # puts params
-    @casestudy = Casestudy.find(params[:casestudy_id])
-    @page = @casestudy.pages.create(page_params)
-    if @page.save
-      # puts "#### #{@page.inspect}"
-      redirect_to casestudy_path(@casestudy)
+  def update
+    if @casestudy.update(casestudy_params)
+      redirect_to @casestudy, notice: 'Casestudy details updated successfully.'
     end
   end
-
 
   private
 
@@ -39,8 +31,7 @@ class CasestudiesController < ApplicationController
     params.require(:casestudy).permit :name, :duration, :scale
   end
 
-  def page_params
-    params.require(:page).permit :body
+  def question_params
+    params.require(:question).permit :body
   end
-
 end

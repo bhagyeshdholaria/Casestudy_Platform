@@ -9,9 +9,11 @@
         <li class="nav-item">
           <%= link_to 'Casestudies', casestudies_path, class: "nav-link" %>
         </li>
-        <!--        <li class="nav-item">-->
-        <%#= link_to 'Twitter Accounts', twitter_accounts_path, class: "nav-link" %>
-        <!--        </li>-->
+        <% if can? :manage, Trait %>
+          <li class="nav-item">
+            <%= link_to 'Traits', traits_path, class: "nav-link" %>
+          </li>
+        <% end %>
         <!--        <li class="nav-item">-->
         <%#= link_to 'About', aboutpage_path, class: "nav-link" %>
         <!--        </li>-->

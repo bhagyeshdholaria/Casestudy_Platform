@@ -1,0 +1,15 @@
+<div class="border p-3 mb-2 bg-light">
+  <div class="d-flex">
+    <p class="me-5"><u>Question <%= cnt %></u></p>
+    <% if can? :update, Casestudy %>
+      <div>
+        <%= link_to "Edit", edit_casestudy_question_path(@casestudy, question), class: 'me-3 text-primary ' %>
+        <%= link_to "Delete", casestudy_question_path(@casestudy, question), method: :delete, class: 'me-5 text-danger', data: {confirm: 'Are you sure?'} %>
+      </div>
+      <p class="text-info">Traits: <%= question.traits.map(&:name).join(', ')  %></p>
+  <% end %>
+  </div>
+
+  <p><%=raw question.body %></p>
+<!--  <hr class="py-1">-->
+</div>

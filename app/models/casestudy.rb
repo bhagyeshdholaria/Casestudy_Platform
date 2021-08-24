@@ -9,6 +9,7 @@ class Casestudy < ApplicationRecord
 
   has_many :traits, through: :questions # to identify all traits which can be assessed by this casestudy
 
+  validates :name, presence: true
   validates :duration, presence: true
   validates :scale, presence: true, numericality: { greater_than_or_equal_to: 1, only_integer: true }
 end

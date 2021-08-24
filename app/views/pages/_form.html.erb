@@ -1,0 +1,10 @@
+<%= form_with model: page, url: url  do |f| %>
+  <%= render 'shared/form_errors', form: f %>
+
+  <div class="mb-3">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: 'form-control' %>
+  </div>
+
+  <%= f.button 'Save Page', class: 'btn btn-success' %>
+<% end %>

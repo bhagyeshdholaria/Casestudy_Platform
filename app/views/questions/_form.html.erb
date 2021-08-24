@@ -1,0 +1,16 @@
+<%= form_with model: question, url: url  do |f| %>
+  <%= render 'shared/form_errors', form: f %>
+
+  <div class="mb-3">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: 'form-control' %>
+  </div>
+
+  <div class="w-25 mb-3">
+    <%= f.label :trait_ids, 'Traits (use Ctrl for multiple selection)' %>
+    <%= select_tag :trait_ids, options_from_collection_for_select(Trait.all, "id", "name", question.trait_ids), multiple: true, class: 'form-control', autofocus: true %>
+    <%= link_to 'Manage traits', traits_path, class: 'btn btn-link' %>
+  </div>
+
+  <%= f.button 'Save Question', class: 'btn btn-success' %>
+<% end %>

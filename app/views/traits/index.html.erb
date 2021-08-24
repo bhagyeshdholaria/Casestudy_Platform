@@ -1,0 +1,17 @@
+<div class="d-flex align-items-center justify-content-between p-3 mb-5">
+  <h1>Traits</h1>
+  <div>
+    <%= link_to 'Add Trait', new_trait_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+<ul class="list-group list-group-flush mt-4">
+  <% @traits.each do |trait| %>
+
+    <li class="list-group-item d-flex align-items-center">
+      <div class="me-auto">
+        <%= trait.name %>
+      </div>
+      <%= button_to 'Delete', trait_path(trait), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+    </li>
+  <% end %>
+</ul>

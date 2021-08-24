@@ -1,0 +1,11 @@
+<h1>Add new Trait</h1>
+<%= form_with model: @trait do |f| %>
+  <%= render 'shared/form_errors', form: f %>
+
+  <div class="mb-3">
+    <%= f.label :name, 'Trait:' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <%= f.button 'Add Trait', class: 'btn btn-success' %>
+  <% end %>

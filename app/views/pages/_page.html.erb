@@ -1,0 +1,14 @@
+<div class="border p-3 mb-2 bg-light">
+  <div class="d-flex">
+    <p class="me-5"><u>Page <%= cnt %></u></p>
+    <% if can? :update, Casestudy %>
+      <div>
+        <%= link_to "Edit", edit_casestudy_page_path(@casestudy, page),class: 'me-3 text-primary ' %>
+        <%= link_to "Delete", casestudy_page_path(@casestudy, page), method: :delete, class: 'text-danger', data: {confirm: 'Are you sure?'} %>
+      </div>
+    <% end %>
+  </div>
+
+  <p><%=raw page.body %></p>
+<!--  <hr class="py-1">-->
+</div>

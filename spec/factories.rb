@@ -20,4 +20,18 @@ FactoryBot.define do
     scale { Random.new.rand(1..10) }
     creator
   end
+
+  factory :page do
+    sequence(:body) { |n| "Page Body #{n}" }
+    casestudy
+  end
+
+  factory :question do
+    sequence(:body) { |n| "Question Body #{n}" }
+    casestudy
+  end
+
+  factory :trait do
+    sequence(:name) { |n| "trait #{n}" }
+  end
 end
