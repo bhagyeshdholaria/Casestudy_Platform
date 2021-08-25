@@ -14,8 +14,12 @@ class TraitsController < ApplicationController
   end
 
   def destroy
-    @trait.destroy
-    redirect_to traits_path, notice: "\"#{@trait.name}\" trait deleted."
+    if QuestionTrait.exists?(trait_id: @trait.id)
+      redirect_to traits_path, alert: 'Trait is assigned to existing casestudies.'
+    else
+      @trait.destroy
+      redirect_to traits_path, notice: "\"#{@trait.name}\" trait deleted."
+    end
   end
 
   private

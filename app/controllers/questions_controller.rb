@@ -1,4 +1,7 @@
 class QuestionsController < ApplicationController
+  load_and_authorize_resource :casestudy
+  load_and_authorize_resource through: :casestudy
+
   before_action :set_question, only: [:edit, :update, :destroy]
   before_action :get_casestudy
   def new
@@ -8,6 +11,9 @@ class QuestionsController < ApplicationController
   def create
     @question = @casestudy.questions.create question_params
     if @question.save
+      if params[:trait_ids].present?
+        @question.trait_ids = trait_ids
+      end
       redirect_to casestudy_path @casestudy, notice: 'Question saved successfully.'
     else
       render :new

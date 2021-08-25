@@ -1,10 +1,11 @@
 class PagesController < ApplicationController
+  load_and_authorize_resource :casestudy
+  load_and_authorize_resource through: :casestudy
+
   before_action :set_page, only: [:edit, :update, :destroy]
   before_action :get_casestudy
 
-  def new
-    @page = @casestudy.pages.build
-  end
+  def new; end
 
   def create
     @page = @casestudy.pages.create(page_params)

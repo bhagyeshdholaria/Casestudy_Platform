@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   get '/contentcreator_dashboard', to: 'dashboard#contentcreatordash', as: 'contentcreator_dashboard'
 
   resources :casestudies do
-    resources :pages
-    resources :questions
+    resources :pages, :questions
   end
 
   resources :traits, only: [:index, :new, :create, :destroy]
+  resources :casestudy_users, only: [:index, :new, :create]
+
+  resources :manage_roles
 end

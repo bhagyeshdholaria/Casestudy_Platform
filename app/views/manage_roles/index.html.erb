@@ -1,0 +1,35 @@
+<h1>Role Manager</h1>
+<%= form_with model: @role_user, url: manage_roles_path do |f| %>
+  <%= render 'shared/form_errors', form: f %>
+
+  <div class="row my-3 align-items-center">
+    <div class="col">
+      <%#= f.label :user_id, 'User' %>
+      <%= f.collection_select :user_id, User.not_cc.order(:name), :id, :name, {prompt: 'Select User'}, { class: 'form-select'} %>
+    </div>
+    <div class="col">
+      <%#= f.label :role_id, 'Role' %>
+      <%= f.collection_select :role_id, Role.order(:name), :id, :name, {prompt: 'Select Role'}, { class: 'form-select'} %>
+    </div>
+    <div class="col text-center">
+      <%= check_box_tag :force, class: 'form-control' %>
+      <%= f.label :force, 'Clear Existing Roles', class: 'col' %>
+    </div>
+    <%= f.button 'Assign', class: 'btn btn-success col' %>
+  </div>
+<% end %>
+
+<div class="my-3">
+  <h3>Existing Roles</h3>
+  <% User.all.each do |user| %>
+    <%= fields_for user do |ff| %>
+      <div class="rows d-flex mb-3">
+        <%= ff.label user.name, class: 'col-2 ' %>
+        <%= ff.collection_check_boxes(:role_ids, Role.all, :id, :name) do |b| %>
+          <%= b.check_box disabled: true, class: 'form-check-input me-2' %>
+          <%= b.label class: 'col-1 form-check-label' %>
+        <% end %><br>
+      </div>
+    <% end %>
+  <% end %>
+</div>

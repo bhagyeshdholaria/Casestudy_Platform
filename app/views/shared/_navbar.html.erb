@@ -6,17 +6,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        <% if user_signed_in? %>
         <li class="nav-item">
           <%= link_to 'Casestudies', casestudies_path, class: "nav-link" %>
         </li>
+        <% end %>
         <% if can? :manage, Trait %>
           <li class="nav-item">
             <%= link_to 'Traits', traits_path, class: "nav-link" %>
           </li>
         <% end %>
-        <!--        <li class="nav-item">-->
-        <%#= link_to 'About', aboutpage_path, class: "nav-link" %>
-        <!--        </li>-->
+        <% if can? :read, CasestudyUser %>
+          <li class="nav-item">
+            <%= link_to 'Assessments', casestudy_users_path, class: "nav-link" %>
+          </li>
+        <% end %>
+        <% if can? :manage, RoleUser %>
+          <li class="nav-item">
+            <%= link_to 'Manage Roles', manage_roles_path, class: "nav-link" %>
+          </li>
+        <% end %>
       </ul>
 
       <ul class=" navbar-nav ms-auto mb-2 mb-lg-0">

@@ -1,0 +1,37 @@
+<div class="d-flex align-items-center justify-content-between p-3 mb-5">
+  <h1>Assessments</h1>
+  <% if can? :create, CasestudyUser %>
+  <div>
+    <%= link_to 'Create new Assessment', new_casestudy_user_path, class: 'btn btn-primary' %>
+  </div>
+  <% end %>
+</div>
+
+<table class="table table-hover text-center">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">Assessment ID</th>
+        <th scope="col">Casestudy</th>
+        <th scope="col">Candidate</th>
+        <th scope="col">Assessor</th>
+        <th scope="col">Status</th>
+        <th scope="col">Time Elapsed</th>
+        <th scope="col">Started Time</th>
+        <th scope="col">Completed Time</th>
+      </tr>
+    </thead>
+  <tbody>
+  <% @casestudy_users.order(:id).each do |casestudy_user| %>
+    <tr>
+      <td><%= casestudy_user.id %></td>
+      <td><%= casestudy_user.casestudy.name %></td>
+      <td><%= casestudy_user.user.name %></td>
+      <td><%= casestudy_user.assessor.name %></td>
+      <td><%= casestudy_user.status %></td>
+      <td><%= casestudy_user.time_elapsed %></td>
+      <td><%= casestudy_user.started_time %></td>
+      <td><%= casestudy_user.completed_time %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

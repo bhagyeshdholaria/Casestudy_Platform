@@ -13,11 +13,16 @@ class Ability
       can :contentcreatordash, :dashboard
       can :manage, Trait
       can :manage, Casestudy, creator: user
+      can :manage, Page, casestudy: { creator: user }
+      can :manage, Question, casestudy: { creator: user }
+      can [:read, :update], CasestudyUser, casestudy: { creator: user }
+      can :create, CasestudyUser
+      can :manage, RoleUser
 
     elsif user.roles.exists?(name: 'assessor')
       can :assessordash, :dashboard
       can :read, Casestudy, casestudy_users: { assessor: user }
-      # can :read, QuestionTrait, question: { casestudy: { casestudy_users: { assessor: user } } }
+      can :read, CasestudyUser, assessor: user
 
     elsif user.roles.exists?(name: 'candidate')
       can :candidatedash, :dashboard

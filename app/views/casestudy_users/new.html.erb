@@ -1,0 +1,22 @@
+<h1 class="mb-3">Take Assessment</h1>
+
+<%= form_with model: @casestudy_user do |f| %>
+  <div class="row mb-5">
+    <div class="col">
+      <%= f.label :casestudy_id, 'Casestudy' %>
+      <%= f.collection_select :casestudy_id, Casestudy.where(creator: current_user).order(:name), :id, :name, {include_blank: true}, { class: 'form-select'} %>
+    </div>
+    <div class="col">
+      <%= f.label :assessor_id, 'Assessor' %>
+      <%= f.collection_select :assessor_id, User.having_role('assessor'), :id, :name, {include_blank: true}, { class: 'form-select'} %>
+    </div>
+    <div class="col">
+      <%= f.label :user_id, 'Candidate' %>
+      <%= f.collection_select :user_id, User.having_role('candidate'), :id, :name, {include_blank: true}, { class: 'form-select'} %>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <%= f.button 'Assign Casestudy', class: 'btn btn-success p-3' %>
+  </div>
+<% end %>
