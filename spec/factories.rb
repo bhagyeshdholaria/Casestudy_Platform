@@ -1,11 +1,12 @@
 FactoryBot.define do
   factory :user, aliases: [:creator] do
-    name { 'contentcreator1' }
+    sequence(:name) { |n| "contentcreator#{n}" }
     email { "#{name}@g.c" }
     password { '111111' }
 
     after(:create) do |user|
-      user.roles << FactoryBot.create(:role)
+      # user.roles << FactoryBot.create(:role) unless user.roles.exists?(name: 'contentcreator')
+      user.roles << Role.find_or_create_by(name: 'contentcreator')
     end
   end
 
@@ -15,7 +16,9 @@ FactoryBot.define do
     password { '111111' }
 
     after(:create) do |user|
-      user.roles << FactoryBot.create(:role, name: 'assessor')
+      # user.roles << FactoryBot.create(:role, name: 'assessor')
+      user.roles << Role.find_or_create_by(name: 'assessor')
+
     end
   end
 
@@ -25,7 +28,9 @@ FactoryBot.define do
     password { '111111' }
 
     after(:create) do |user|
-      user.roles << FactoryBot.create(:role, name: 'candidate')
+      # user.roles << FactoryBot.create(:role, name: 'candidate')
+      user.roles << Role.find_or_create_by(name: 'candidate')
+
     end
   end
 
@@ -57,5 +62,12 @@ FactoryBot.define do
 
   factory :trait do
     sequence(:name) { |n| "trait #{n}" }
+  end
+
+  factory :casestudy_user do
+    user
+    casestudy
+    assessor
+    status { 'pending' }
   end
 end

@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :createdcasestudies, class_name: 'Casestudy', foreign_key: 'creator_id'
 
 
-  validates :name, length: { minimum: 3 }
+  validates :name, length: { minimum: 3 }, presence: true
   validates :email, uniqueness: true, presence: true,
                     format: { with: /\A[\w.+-]+@\w+\.\w+\z/, message: 'Enter valid email address' }
 

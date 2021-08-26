@@ -3,5 +3,4 @@ class QuestionTrait < ApplicationRecord
   belongs_to :trait
 
   has_many :assessor_responses
-
 end

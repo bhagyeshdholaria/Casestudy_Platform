@@ -1,6 +1,5 @@
 class Page < ApplicationRecord
   belongs_to :casestudy
 
-  validates :body, presence: true
+  validates_presence_of :body
 end
-
