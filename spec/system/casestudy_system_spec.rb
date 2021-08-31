@@ -14,6 +14,7 @@ RSpec.describe 'casestudy CRU', type: :system do
     it 'list all casestudies' do
       driven_by(:rack_test)
       user.createdcasestudies << create_list(:casestudy, 5, creator: user)
+
       sign_in user
       visit '/'
       click_link 'Casestudies'

@@ -4,9 +4,13 @@ FactoryBot.define do
     email { "#{name}@g.c" }
     password { '111111' }
 
+    before(:create) do
+      Role.create(name: 'candidate')
+    end
+
     after(:create) do |user|
-      # user.roles << FactoryBot.create(:role) unless user.roles.exists?(name: 'contentcreator')
       user.roles << Role.find_or_create_by(name: 'contentcreator')
+      user.roles.destroy(Role.find_by(name: 'candidate'))
     end
   end
 
@@ -15,22 +19,23 @@ FactoryBot.define do
     email { "#{name}@g.c" }
     password { '111111' }
 
-    after(:create) do |user|
-      # user.roles << FactoryBot.create(:role, name: 'assessor')
-      user.roles << Role.find_or_create_by(name: 'assessor')
+    before(:create) do
+      Role.create(name: 'candidate')
+    end
 
+    after(:create) do |user|
+      user.roles << Role.find_or_create_by(name: 'assessor')
+      user.roles.destroy(Role.find_by(name: 'candidate'))
     end
   end
 
   factory :candidate, class: 'User' do
-    name { 'candidate1' }
+    sequence(:name) { |n| "candidate#{n}" }
     email { "#{name}@g.c" }
     password { '111111' }
 
-    after(:create) do |user|
-      # user.roles << FactoryBot.create(:role, name: 'candidate')
-      user.roles << Role.find_or_create_by(name: 'candidate')
-
+    before(:create) do
+      Role.create(name: 'candidate')
     end
   end
 
@@ -42,6 +47,7 @@ FactoryBot.define do
     sequence(:name) { |n| "casestudy#{n}" }
     duration { Random.new.rand(100..200) }
     scale { Random.new.rand(1..10) }
+    passkey { 'zxzx' }
     creator
 
     after(:create) do |casestudy|

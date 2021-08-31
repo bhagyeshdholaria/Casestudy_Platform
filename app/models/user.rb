@@ -23,6 +23,6 @@ class User < ApplicationRecord
   private
 
   def add_role
-    RoleUser.create(user_id: id, role_id: 1)
+    RoleUser.create(user_id: id, role_id: Role.find_by(name: 'candidate').id)
   end
 end

@@ -5,14 +5,14 @@
   <div class="row my-3 align-items-center">
     <div class="col">
       <%#= f.label :user_id, 'User' %>
-      <%= f.collection_select :user_id, User.not_cc.order(:name), :id, :name, {prompt: 'Select User'}, { class: 'form-select'} %>
+      <%= f.collection_select :user_id, User.not_cc.order(:name).uniq, :id, :name, {prompt: 'Select User'}, { class: 'form-select'} %>
     </div>
     <div class="col">
       <%#= f.label :role_id, 'Role' %>
       <%= f.collection_select :role_id, Role.order(:name), :id, :name, {prompt: 'Select Role'}, { class: 'form-select'} %>
     </div>
     <div class="col text-center">
-      <%= check_box_tag :force, class: 'form-control' %>
+      <%= check_box_tag :force,'1', class: 'form-control' %>
       <%= f.label :force, 'Clear Existing Roles', class: 'col' %>
     </div>
     <%= f.button 'Assign', class: 'btn btn-success col' %>

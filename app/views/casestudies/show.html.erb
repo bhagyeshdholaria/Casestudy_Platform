@@ -9,6 +9,9 @@
   </div>
 </div>
 <h5 class="mb-5">duration: <%= @casestudy.duration %> | scale: <%= @casestudy.scale %></h5>
+<% if can? :update, Casestudy %>
+  <h5 class="mb-5">Passkey: <%= @casestudy.passkey %></h5>
+<% end %>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">

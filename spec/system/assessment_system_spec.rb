@@ -7,7 +7,6 @@ RSpec.describe 'Take assessment', type: :system do
 
   let(:user) { create(:user) }
   let(:casestudy) { create(:casestudy, creator: user) }
-  let(:casestudy) { create(:casestudy, creator: user) }
   let(:assessor) { create(:assessor) }
   let(:candidate) { create(:candidate) }
 
@@ -33,6 +32,5 @@ RSpec.describe 'Take assessment', type: :system do
     CasestudyUser.all.map(&:id).each do |id|
       expect(page).to have_content id
     end
-
   end
 end

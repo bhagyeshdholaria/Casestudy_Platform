@@ -28,10 +28,6 @@ class CasestudiesController < ApplicationController
   private
 
   def casestudy_params
-    params.require(:casestudy).permit :name, :duration, :scale
-  end
-
-  def question_params
-    params.require(:question).permit :body
+    params.require(:casestudy).permit :name, :duration, :scale, :passkey
   end
 end

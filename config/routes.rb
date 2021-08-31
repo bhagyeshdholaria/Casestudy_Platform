@@ -12,7 +12,12 @@ Rails.application.routes.draw do
   end
 
   resources :traits, only: [:index, :new, :create, :destroy]
-  resources :casestudy_users, only: [:index, :new, :create]
+  resources :casestudy_users, only: [:index, :new, :create] do
+    resources :user_responses
+  end
 
   resources :manage_roles
+
+  get '/casestudies/:casestudy_id/assessor/:assessor_id/start', to: 'walkin#entry', as: 'entry'
+  post '/casestudies/:casestudy_id/assessor/:assessor_id/start', to: 'walkin#start', as: 'start'
 end

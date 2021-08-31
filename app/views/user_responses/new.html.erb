@@ -1,0 +1,18 @@
+<h1>exam page</h1>
+<div class="row">
+  <div class="col-8">
+    <% @pages.each_with_index do |page, index| %>
+      <%= render 'pages/page', page: page, cnt: index+1 %>
+    <% end %>
+  </div>
+  <div class="col-4">
+    <% @questions.each_with_index do |question, index| %>
+      <% response = @user_responses.find_by(question_id: question.id) %>
+      <div class="border mb-3">
+      <%= render 'questions/question', question: question, cnt: index+1 %>
+      <%= render 'response',response: response, question: question %>
+      </div>
+    <% end %>
+<%= button_to 'Submit', casestudy_user_user_responses_path %>
+  </div>
+</div>

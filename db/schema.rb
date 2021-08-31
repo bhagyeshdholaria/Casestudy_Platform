@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_18_064526) do
+ActiveRecord::Schema.define(version: 2021_08_27_054719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_08_18_064526) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.bigint "creator_id", null: false
+    t.string "passkey"
     t.index ["creator_id"], name: "index_casestudies_on_creator_id"
   end
 
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_08_18_064526) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["assessor_id"], name: "index_casestudy_users_on_assessor_id"
+    t.index ["casestudy_id", "user_id"], name: "index_casestudy_users_on_casestudy_id_and_user_id", unique: true
     t.index ["casestudy_id"], name: "index_casestudy_users_on_casestudy_id"
     t.index ["user_id"], name: "index_casestudy_users_on_user_id"
   end

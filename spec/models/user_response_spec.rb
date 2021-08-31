@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe UserResponse, type: :model do
-  describe 'validations' do
-    it { should validate_presence_of(:response) }
-  end
 
   describe 'associations' do
     it { should belong_to(:question) }

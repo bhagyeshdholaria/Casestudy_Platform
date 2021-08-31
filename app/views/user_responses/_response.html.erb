@@ -1,0 +1,12 @@
+<div class=" mb-2">
+  <%= form_with model: response, method: :post, url: casestudy_user_user_responses_path(@casestudy_user, question: question) do |f| %>
+    <div class="row p-3">
+      <div class="col-9">
+        <%= f.text_area :response, class: 'form-control' %>
+      </div>
+      <div class="col-2">
+        <%= f.button 'Save', class: 'btn btn-success' %>
+      </div>
+    </div>
+  <% end %>
+</div>

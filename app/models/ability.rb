@@ -27,9 +27,9 @@ class Ability
     elsif user.roles.exists?(name: 'candidate')
       can :candidatedash, :dashboard
       can :read, Casestudy, users: { id: user.id }
-
+      can [:read, :update], CasestudyUser, user: user
+      can :manage, UserResponse, user: user
     end
-
 
     # Define abilities for the passed in user here. For example:
     #
