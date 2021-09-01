@@ -1,4 +1,5 @@
-<h1>exam page</h1>
+<h1><%= @casestudy.name %></h1>
+<div id="clockdiv"></div>
 <div class="row">
   <div class="col-8">
     <% @pages.each_with_index do |page, index| %>
@@ -16,3 +17,43 @@
 <%= button_to 'Submit', casestudy_user_user_responses_path %>
   </div>
 </div>
+
+<script>
+    const deadline = new Date("<%= @deadline %>");
+    function getTimeRemaining(endtime){
+        const total = Date.parse(endtime) - Date.parse(Date())
+        const minutes = Math.floor( (total/1000/60) )
+        const seconds = Math.floor( (total/1000) % 60 )
+        // console.log(total, minutes, seconds, (seconds % 30) )
+        return {total, minutes, seconds}
+    }
+
+    function initializeClock(id, endtime){
+        const clock = document.getElementById(id)
+        const timeinterval = setInterval(() => {
+            const t = getTimeRemaining(endtime)
+            clock.innerHTML = t.minutes + ':' + t.seconds + ' minutes'
+            if (t.seconds % 30 === 0){
+                const request = new XMLHttpRequest();
+                request.open("post", "<%= casestudy_user_updatetime_path(@casestudy_user) %>");
+                const token = document.querySelector('meta[name="csrf-token"]').content
+                request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                request.setRequestHeader("X-CSRF-Token", token)
+                request.send(`time_elapsed=${t.total}`);
+            }
+            if (t.total <= 0){
+                clearInterval(timeinterval)
+
+                const request2 = new XMLHttpRequest();
+                request2.open("post", "<%= casestudy_user_user_responses_path %>");
+                const token = document.querySelector('meta[name="csrf-token"]').content
+                request2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                request2.setRequestHeader("X-CSRF-Token", token)
+                request2.send();
+
+                self.location.reload()
+            }
+        }, 1000)
+    }
+initializeClock('clockdiv', deadline)
+</script>

@@ -9,6 +9,7 @@ class TestHandler
     if (@casestudy_user.status == 'pending') && @casestudy_user.started_time.nil?
       @casestudy_user.status = 'ongoing'
       @casestudy_user.started_time = DateTime.now
+      @casestudy_user.time_elapsed = 0
       @casestudy_user.save
       AutocompletionJob.set(wait_until: @casestudy_user.started_time + 1.days).perform_later(@casestudy_user)
     end
@@ -37,6 +38,7 @@ class TestHandler
     @casestudy_user = CasestudyUser.find(@params[:casestudy_user_id])
     @casestudy_user.status = 'completed'
     @casestudy_user.completed_time = DateTime.now
+    @casestudy_user.time_elapsed = @casestudy_user.casestudy.duration
     @casestudy_user.save
   end
 end

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :traits, only: [:index, :new, :create, :destroy]
   resources :casestudy_users, only: [:index, :new, :create] do
     resources :user_responses
+    post '/update-time', to: 'user_responses#updatetime', as: 'updatetime'
   end
 
   resources :manage_roles

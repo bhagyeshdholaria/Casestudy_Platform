@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
       if params[:trait_ids].present?
         @question.trait_ids = trait_ids
       end
-      redirect_to casestudy_path @casestudy, notice: 'Question saved successfully.'
+      redirect_to casestudy_path(@casestudy), notice: 'Question saved successfully.'
     else
       render :new
     end
