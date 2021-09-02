@@ -52,7 +52,7 @@ FactoryBot.define do
 
     after(:create) do |casestudy|
       casestudy.pages << FactoryBot.create_list(:page, 4, casestudy: casestudy)
-      casestudy.questions << FactoryBot.create_list(:question, 4, casestudy: casestudy)
+      casestudy.questions << FactoryBot.create_list(:question, 2, casestudy: casestudy)
     end
   end
 

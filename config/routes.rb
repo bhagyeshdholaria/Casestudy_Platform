@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     post '/update-time', to: 'user_responses#updatetime', as: 'updatetime'
   end
 
-  resources :manage_roles
+  resources :manage_roles, only: [:index, :create]
 
   get '/casestudies/:casestudy_id/assessor/:assessor_id/start', to: 'walkin#entry', as: 'entry'
   post '/casestudies/:casestudy_id/assessor/:assessor_id/start', to: 'walkin#start', as: 'start'

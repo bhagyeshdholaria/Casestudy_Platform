@@ -1,5 +1,4 @@
 class CasestudyUsersController < ApplicationController
-  # load_and_authorize_resource :casestudy
   load_and_authorize_resource
 
   def index; end

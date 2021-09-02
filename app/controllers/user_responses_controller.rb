@@ -2,9 +2,7 @@ class UserResponsesController < ApplicationController
   load_and_authorize_resource CasestudyUser
   load_and_authorize_resource UserResponse, through: CasestudyUser
 
-  def index
-    puts user_response_params
-  end
+  def index; end
 
   def new
     @casestudy_user, @casestudy, @pages, @questions, @user_responses = TestHandler.new(user_response_params, current_user).load_data
