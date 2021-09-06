@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   end
 
   resources :traits, only: [:index, :new, :create, :destroy]
-  resources :casestudy_users, only: [:index, :new, :create] do
+  resources :casestudy_users do
     resources :user_responses
+    resources :assessor_responses
     post '/update-time', to: 'user_responses#updatetime', as: 'updatetime'
   end
 

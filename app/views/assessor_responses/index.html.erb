@@ -1,0 +1,55 @@
+<h1>Assess User Responses</h1>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="situation-tab" data-bs-toggle="tab" data-bs-target="#situation" type="button" role="tab" aria-controls="situation" aria-selected="true">Situation</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="questions-tab" data-bs-toggle="tab" data-bs-target="#questions" type="button" role="tab" aria-controls="questions" aria-selected="true">Questions</button>
+  </li>
+</ul><br>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade" id="situation" role="tabpanel" aria-labelledby="situation-tab">
+    <% @pages.each_with_index do |page, index| %>
+      <%= render 'pages/page',page: page, cnt: index+1 %>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade show active" id="questions" role="tabpanel" aria-labelledby="questions-tab">
+    <%= form_with model: @casestudy_user, url: casestudy_user_path(@casestudy_user) do |f| %>
+
+      <% @questions.each_with_index do |question, index| %>
+        <% response = @user_responses.find_by(question_id: question.id) %>
+        <div class="m-3">
+          <div class="row">
+            <div class="col-8  p-3">
+              <%= render 'questions/question', question: question, cnt: index+1 %>
+              <div class="p-3">
+                <p><u>Response:</u></p>
+                <p><%= response.response %></p>
+              </div>
+            </div>
+
+            <div class="col-4 p-3">
+              <p><u>Rate this answer on:</u></p>
+              <% @assessor_responses.where(question_trait: question.question_traits).each do |assessor_response| %>
+                <%= f.fields_for assessor_response, index: assessor_response.id do |ar_form| %>
+
+                  <div class="row mb-2">
+                    <div class="col-6">
+                      <%= ar_form.label :rating, assessor_response.question_trait.trait.name %>
+                    </div>
+                    <div class="col-6 w-25">
+                      <%= ar_form.number_field :rating, min: 0, max: @casestudy.scale, step: 0.1, disabled: true %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <hr>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

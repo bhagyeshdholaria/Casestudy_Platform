@@ -74,6 +74,28 @@ FactoryBot.define do
     user
     casestudy
     assessor
-    status { 'pending' }
+    # status { 'pending' }
+
+    trait  :completed do
+      started_time { 1.hour.ago }
+      completed_time { 1.minute.ago }
+      status { 'completed' }
+      time_elapsed { 131 }
+
+    end
+
+    factory :completed_csu, traits: [:completed]
+  end
+
+  factory :user_response do
+    casestudy_user
+    question
+    user
+    sequence(:response) { |n| "answer #{n}" }
+
+    # after(:create) do |user_response|
+    #   casestudy_user.casestudy.questions.each do
+    #     UserResponse.create
+    #   end
   end
 end

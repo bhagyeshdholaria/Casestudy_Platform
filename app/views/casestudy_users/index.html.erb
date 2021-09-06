@@ -18,6 +18,9 @@
         <th scope="col">Time Elapsed</th>
         <th scope="col">Started Time</th>
         <th scope="col">Completed Time</th>
+        <% if can? :manage, AssessorResponse %>
+        <th scope="col">Assess</th>
+        <% end %>
       </tr>
     </thead>
   <tbody>
@@ -31,6 +34,15 @@
       <td><%= casestudy_user.time_elapsed %></td>
       <td><%= casestudy_user.started_time %></td>
       <td><%= casestudy_user.completed_time %></td>
+      <% if can? :manage, AssessorResponse %>
+        <td>
+          <% if casestudy_user.status == 'completed' %>
+            <%= link_to 'Assess', new_casestudy_user_assessor_response_path(casestudy_user) %>
+          <% elsif casestudy_user.status == 'assessed' %>
+            <%= link_to 'View', casestudy_user_assessor_responses_path(casestudy_user) %>
+          <% end %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>

@@ -22,7 +22,9 @@ class Ability
     elsif user.roles.exists?(name: 'assessor')
       can :assessordash, :dashboard
       can :read, Casestudy, casestudy_users: { assessor: user }
-      can :read, CasestudyUser, assessor: user
+      can :manage, CasestudyUser, assessor: user
+      can :create, AssessorResponse
+      can :manage, AssessorResponse, casestudy_user: { assessor: user }
 
     elsif user.roles.exists?(name: 'candidate')
       can :candidatedash, :dashboard

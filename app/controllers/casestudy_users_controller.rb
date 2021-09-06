@@ -15,9 +15,22 @@ class CasestudyUsersController < ApplicationController
     end
   end
 
+  def update
+    assessor_responses = ar_params[:casestudy_user][:assessor_response]
+    if AssessorResponse.update(assessor_responses.keys, assessor_responses.values)
+      @casestudy_user.status = 'assessed'
+      @casestudy_user.save
+      redirect_to casestudy_users_path
+    end
+  end
+
   private
 
   def casestudy_user_params
     params.require(:casestudy_user).permit :casestudy_id, :assessor_id, :user_id
+  end
+
+  def ar_params
+    params.permit!
   end
 end
