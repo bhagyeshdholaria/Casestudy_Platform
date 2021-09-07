@@ -16,7 +16,7 @@ class CasestudyUsersController < ApplicationController
   end
 
   def update
-    assessor_responses = ar_params[:casestudy_user][:assessor_response]
+    assessor_responses = ar_params[:assessor_response]
     if AssessorResponse.update(assessor_responses.keys, assessor_responses.values)
       @casestudy_user.status = 'assessed'
       @casestudy_user.save
@@ -31,6 +31,6 @@ class CasestudyUsersController < ApplicationController
   end
 
   def ar_params
-    params.permit!
+    params.require(:casestudy_user).permit(assessor_response: [:rating])
   end
 end
